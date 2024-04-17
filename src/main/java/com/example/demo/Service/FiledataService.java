@@ -10,12 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Repository.FiledataRepository;
 import com.example.demo.entity.FileData;
 import com.example.demo.utils.UuidTools;
+
 
 @Service
 public class FiledataService {
@@ -27,13 +30,13 @@ public class FiledataService {
 		
 		FileData saved = new FileData();
 		
-		// uuid
+		// UUID
 		String uuid = UuidTools.getUUID();
-		// path
+		// Path
 		String uploadDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		// filename
+		// FileName
 		String originalFilename = multipartFile.getOriginalFilename();
-		// new path
+		// New Path
 		String path = Paths.get(originalFilename).getParent().toString();
 		Path subPath = Paths.get(path).resolve(uploadDate);
 		
@@ -53,6 +56,18 @@ public class FiledataService {
         
 		return saved;
 	}
+	
+		public Resource load(String uuid) throws Exception {
+			
+			// 透過UUID取得檔案位置
+			FileData filedata = filedataRepository.findByUuid(uuid);
+			// 將file.getPath()<String>轉變為Path Object 就可以對路徑操作處理
+			Path filePath = Paths.get(filedata.getPath());	
+			//使用 Spring 工具 UrlResource 取得檔案並回傳(Resource型態方便在網路傳遞)
+			Resource resource = new UrlResource(filePath.toUri());
+			return resource;
+		}
+	
 	
 	
 }
