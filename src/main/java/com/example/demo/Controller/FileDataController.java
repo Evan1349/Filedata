@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.FileData;
@@ -18,14 +20,14 @@ import com.example.demo.Repository.FiledataRepository;
 import com.example.demo.Service.FiledataService;
 
 
-
+@RestController
 public class FileDataController {
 	@Autowired
 	FiledataService filedataService;
 	@Autowired
 	FiledataRepository filedataRepository;
 	
-	@PostMapping(consumes = "multipart/*", headers = "content-type = multipart/form-data")
+	@PostMapping("/upload")
 	public ResponseEntity<FileData> upload(@RequestParam("file") MultipartFile file){
 		
 		try {
