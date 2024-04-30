@@ -18,16 +18,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileData {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@Column
-	private String uuid;
-	@Column
-	private String path;
-	@Column
-	private String flieName;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    
+    @Column
+    private String uuid;
+    
+    @Column
+    private String path;
+    
+    @Column
+    private String fileName;
+    
+    @Column
+    private String contentType;
 
 }
