@@ -12,7 +12,7 @@
 
 
 
-
+//
 **<操作方式>**
 **在Swagger 上傳檔案並生成uuid**
 ![螢幕擷取畫面 2024-04-30 125207](https://github.com/Evan1349/Filedata/assets/94741456/90633d76-0d83-4ef9-868e-a92baa58d413)
